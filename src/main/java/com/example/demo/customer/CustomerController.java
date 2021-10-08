@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 // REST LAYER
-@RestController
+@RestController // allows http requests to be sent thru annotations like @GetMapping
 public class CustomerController {
 
     private final CustomerService customerService;
