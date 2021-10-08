@@ -1,25 +1,26 @@
 package com.example.demo.customer;
 
 import com.example.demo.DemoApplication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 // REST LAYER
 @RestController
 public class CustomerController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
-    public CustomerController() {
-        // this is bad bc customer service can only be used once in this class
-        // but according to the diagram, customerService may be needed elsewhere
-        // also hard to test
-        customerService = new CustomerService();
+    @Autowired
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @GetMapping
-    Customer getCustomer(){
-        return customerService.getCustomer();
+    List<Customer> getCustomer(){
+        return customerService.getCustomers();
     }
 
 }
