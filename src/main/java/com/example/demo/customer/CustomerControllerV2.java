@@ -1,27 +1,28 @@
 package com.example.demo.customer;
 
-import com.example.demo.DemoApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
-@Deprecated // @Deprecated is just a comment and does not actually do anything
-@RequestMapping(path="api/v1/customer")
+@RequestMapping(path="api/v2/customer")
 // REST LAYER
 @RestController // allows http requests to be sent thru annotations like @GetMapping
-public class CustomerController {
+public class CustomerControllerV2 {
 
     private final CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerControllerV2(CustomerService customerService) {
         this.customerService = customerService;
     }
 
     @GetMapping(value ="all")
     List<Customer> getCustomer(){
-        return customerService.getCustomers();
+        return Collections.singletonList(
+                new Customer(0L, "Dave", "123")
+        );
     }
 
     // NOTE: doesnt actually add an entry
