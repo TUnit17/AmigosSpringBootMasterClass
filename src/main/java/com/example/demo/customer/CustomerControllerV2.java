@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-@RequestMapping(path="api/v2/customer")
+@RequestMapping(path="api/v2/customers")
 // REST LAYER
 @RestController // allows http requests to be sent thru annotations like @GetMapping
 public class CustomerControllerV2 {
@@ -18,11 +19,14 @@ public class CustomerControllerV2 {
         this.customerService = customerService;
     }
 
-    @GetMapping(value ="all")
-    List<Customer> getCustomer(){
-        return Collections.singletonList(
-                new Customer(0L, "Dave", "123")
-        );
+    @GetMapping
+    List<Customer> getCustomers(){
+        return customerService.getCustomers();
+    }
+
+    @GetMapping(path ="{customerId}")
+    Customer getCustomer(@PathVariable("customerId") Long id){
+        return customerService.getCustomer(id);
     }
 
     // NOTE: doesnt actually add an entry

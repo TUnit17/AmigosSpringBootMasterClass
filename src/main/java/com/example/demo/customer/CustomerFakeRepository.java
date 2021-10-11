@@ -12,7 +12,8 @@ public class CustomerFakeRepository implements CustomerRepo{
         return Arrays.asList(
                 new Customer(1L, "James Bond", "password123"),
                 new Customer(2L, "Tony Stark", "password456"),
-                new Customer(3L, "Peter Parker", "password789")
+                new Customer(3L, "Peter Parker", "password789"),
+                new Customer(4L, "Roboob", "password789")
         );
     }
 }
