@@ -3,6 +3,7 @@ package com.example.demo.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -29,9 +30,10 @@ public class CustomerControllerV2 {
         return customerService.getCustomer(id);
     }
 
-    // NOTE: doesnt actually add an entry
+    // @Valid == checks to make sure the request is valid
     @PostMapping
-    void createNewCustomer(@RequestBody Customer customer){
+    void createNewCustomer(@Valid @RequestBody Customer customer){
+        // NOTE: doesn't actually add an entry
         System.out.println("POST REQUEST...");
         System.out.println(customer);
     }
