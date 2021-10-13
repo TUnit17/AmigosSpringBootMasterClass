@@ -9,10 +9,10 @@ import javax.validation.constraints.NotBlank;
 class Customer{
     private final Long id;
 
-    @NotBlank
+    @NotBlank(message = "name must not be empty")
     private final String name;
 
-    @NotBlank
+    @NotBlank(message = "password must not be empty")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private final String password;
 
