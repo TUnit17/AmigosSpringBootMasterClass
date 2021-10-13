@@ -9,7 +9,6 @@ import java.time.ZonedDateTime;
 
 @ControllerAdvice // allow there to be more than one exception, but right now there is just the ApiRequestException
 public class ApiExceptionHandler {
-
     // how does this class get called?? @ExceptionHandler annotation
     @ExceptionHandler(value = ApiRequestException.class) // @ExceptionHandler == I want this method to handle exceptions called ApiRequestException
     public ResponseEntity<Object> handleApiRequestException(ApiRequestException e){
@@ -18,10 +17,23 @@ public class ApiExceptionHandler {
                 HttpStatus.BAD_REQUEST,
                 ZonedDateTime.now()
         );
-
         return new ResponseEntity<>(
                 apiException,
                 HttpStatus.BAD_REQUEST
+        );
+    }
+
+    // how does this get called? when CusterService.getCustomer throws NotFoundException
+    @ExceptionHandler(value = NotFoundException.class)
+    public ResponseEntity<Object> handleApiRequestException(NotFoundException e){
+        ApiException apiException = new ApiException(e.getMessage(),
+                e,
+                HttpStatus.NOT_FOUND,
+                ZonedDateTime.now()
+        );
+        return new ResponseEntity<>(
+                apiException,
+                HttpStatus.NOT_FOUND
         );
     }
 }
