@@ -19,11 +19,9 @@ public class CustomerConfiguration {
     }
 
     @Bean
-    // method to instantiate real or fake repo
+    // method to instantiate fake repo
     CustomerRepo customerRepo(){
         System.out.println("useFakeCustomerRepo = " + useFakeCustomerRepo);
-        return  useFakeCustomerRepo ?
-                new CustomerFakeRepository() :
-                new CustomerRepository();
+        return  new CustomerFakeRepository();
     }
 }

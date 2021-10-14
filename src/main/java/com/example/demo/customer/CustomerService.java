@@ -14,22 +14,23 @@ import java.util.Objects;
 @Service // this is functionally the same as @Component, but just signifies that it is a Service Component
 public class CustomerService {
 
-    private final CustomerRepo customerRepo;
+    // THIS DEPENDENCY INJECTION IS NO LONGER NEEDED
+    //private final CustomerRepo customerRepo;
+
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public CustomerService(CustomerRepo customerRepo) {
-        this.customerRepo = customerRepo;
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
     List<Customer> getCustomers(){
-        return customerRepo.getCustomers();
+        return customerRepository.findAll();
     }
 
     Customer getCustomer(Long id) {
-        return getCustomers()
-                .stream()
-                .filter(customer -> Objects.equals(customer.getId(), id))
-                .findFirst()
+        return customerRepository
+                .findById(id)
                 .orElseThrow(
                         () -> new NotFoundException(
                                 "customer not found with id: " + id)
